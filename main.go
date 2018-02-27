@@ -5,10 +5,11 @@ package main
 // or use the example above for writing pcap files
 
 import (
-"fmt"
-"github.com/google/gopacket"
-"github.com/google/gopacket/pcap"
-"log"
+ 	"fmt"
+	"github.com/google/gopacket"
+	"github.com/google/gopacket/pcap"
+	"log"
+	"github.com/google/gopacket/layers"
 )
 
 var (
@@ -26,6 +27,16 @@ func main() {
 	// Loop through packets in file
 	packetSource := gopacket.NewPacketSource(handle, handle.LinkType())
 	for packet := range packetSource.Packets() {
+		if tcpLayer := packet.Layer(layers.LayerTypeTCP); tcpLayer != nil {
+			fmt.Println("This is a TCP packet!")
+			// Get actual TCP data from this layer
+			tcp, _ := tcpLayer.(*layers.TCP)
+			fmt.Printf("From src port %d to dst port %d\n", tcp.SrcPort, tcp.DstPort)
+		}
 		fmt.Println(packet)
 	}
+}
+
+func nullTcp(tcp layers.TCP) bool {
+	if tcp.FIN && tcp.SYN && tcp.RST, PSH, ACK, URG, ECE, CWR, NS
 }

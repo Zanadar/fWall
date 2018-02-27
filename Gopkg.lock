@@ -3,13 +3,17 @@
 
 [[projects]]
   name = "github.com/google/gopacket"
-  packages = ["."]
+  packages = [
+    ".",
+    "layers",
+    "pcap"
+  ]
   revision = "11c65f1ca9081dfea43b4f9643f5c155583b73ba"
   version = "v1.1.14"
 
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "2d83df13c519aba05f28ad8dc8864b40b7d9b1e9e66306e48af457914ad73f38"
+  inputs-digest = "eabe57dacec1c3ced734cd14acef3d61343d116ca59e603460840dd9db1bff62"
   solver-name = "gps-cdcl"
   solver-version = 1
